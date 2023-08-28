@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat MSN Style</title>
+<style>
+  /* Estilos... */
+</style>
+</head>
+<body>
+<div id="login-container">
+  <h2>MSN Chat</h2>
+  <form id="login-form">
+    <input type="text" id="username" placeholder="Nome de usuário" required>
+    <input type="password" id="password" placeholder="Senha" required>
+    <button id="login-button">Entrar</button>
+    <button id="signup-button">Criar Conta</button>
+  </form>
+</div>
+
+<div id="chat-container" style="display: none;">
+  <h2>Chat MSN Style</h2>
+  <div id="chat-box"></div>
+  <div id="input-box">
+    <input type="text" id="message" placeholder="Digite uma mensagem...">
+    <button id="send">Enviar</button>
+  </div>
+</div>
+
+<script>
+const loginContainer = document.getElementById('login-container');
+const chatContainer = document.getElementById('chat-container');
+const loginForm = document.getElementById('login-form');
+const signupButton = document.getElementById('signup-button');
+
+const chatBox = document.getElementById('chat-box');
+const messageInput = document.getElementById('message');
+const sendButton = document.getElementById('send');
+
+// Simulação de uma mensagem inicial do sistema
+setTimeout(() => {
+  appendMessage('Sistema', 'Olá! Bem-vindo ao chat MSN Style.');
+}, 1000);
+
+loginForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Evita o envio do formulário padrão
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  // Aqui você pode adicionar a lógica de verificação de login
+  // Por exemplo, verificar se o usuário e senha são válidos
+
+  if (username === 'seu_usuario' && password === 'sua_senha') {
+    loginContainer.style.display = 'none';
+    chatContainer.style.display = 'block';
+  } else {
+    alert('Usuário ou senha incorretos.');
+  }
+});
+
+sendButton.addEventListener('click', sendMessage);
+
+function sendMessage() {
+  const messageText = messageInput.value;
+  if (messageText.trim() !== '') {
+    appendMessage('Você', messageText);
+    messageInput.value = '';
+  }
+}
+
+function appendMessage(sender, message) {
+  const messageElement = document.createElement('div');
+  messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+  chatBox.appendChild(messageElement);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
+</body>
+</html>
